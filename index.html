@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Procel | Arquitectura</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background: #e8d8c3;
+            color: #2d2119;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            height: 90px;
+            background: #38271c;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            color: #eadbc7;
+            font-size: 42px;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            display: block;
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            letter-spacing: 6px;
+            text-align: center;
+            margin-top: -5px;
+        }
+
+        nav {
+            display: flex;
+            gap: 40px;
+        }
+
+        nav a {
+            color: #eadbc7;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        nav a:hover {
+            color: #c59b70;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: calc(100vh - 90px);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+
+        /* =========================
+           FONDO INTERACTIVO
+        ========================= */
+
+        .background {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .house {
+            position: absolute;
+            inset: 0;
+
+            background-size: cover;
+            background-position: center;
+
+            opacity: 0;
+
+            transition:
+                opacity 1.5s ease,
+                transform 8s ease;
+
+            transform: scale(1.05);
+        }
+
+        .house.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .house:nth-child(1) {
+            background-image:
+                url("https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=90");
+        }
+
+        .house:nth-child(2) {
+            background-image:
+                url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=90");
+        }
+
+        .house:nth-child(3) {
+            background-image:
+                url("https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1800&q=90");
+        }
+
+        .house:nth-child(4) {
+            background-image:
+                url("https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1800&q=90");
+        }
+
+
+        /* Oscurece ligeramente la fotografía */
+
+        .background::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(42, 27, 18, 0.78),
+                    rgba(42, 27, 18, 0.35),
+                    rgba(42, 27, 18, 0.10)
+                );
+        }
+
+
+        /* =========================
+           CONTENIDO
+        ========================= */
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+
+            color: #f3e5d2;
+
+            padding-left: 9%;
+            max-width: 750px;
+
+            animation: aparecer 1.2s ease;
+        }
+
+        @keyframes aparecer {
+
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        .small-title {
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            letter-spacing: 4px;
+
+            margin-bottom: 25px;
+
+            color: #d8b995;
+        }
+
+
+        .hero h1 {
+            font-size: clamp(80px, 10vw, 150px);
+
+            font-weight: normal;
+
+            line-height: 0.8;
+
+            letter-spacing: -5px;
+
+            color: #f2e4d1;
+        }
+
+
+        .subtitle {
+            font-family: Arial, sans-serif;
+
+            font-size: 20px;
+
+            letter-spacing: 9px;
+
+            margin-top: 25px;
+
+            color: #dbc2a7;
+        }
+
+
+        /* =========================
+           ESLOGAN
+        ========================= */
+
+        .slogan {
+
+            margin-top: 18px;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 30px;
+
+            font-style: italic;
+
+            color: #ead5bd;
+
+            max-width: 500px;
+
+            line-height: 1.5;
+        }
+
+
+        .description {
+
+            max-width: 500px;
+
+            margin-top: 30px;
+
+            font-size: 19px;
+
+            line-height: 1.7;
+
+            color: #f0dfca;
+        }
+
+
+        /* =========================
+           BOTÓN
+        ========================= */
+
+        .button {
+
+            margin-top: 35px;
+
+            display: inline-block;
+
+            background: #65472f;
+
+            color: #f5e7d5;
+
+            padding: 18px 35px;
+
+            text-decoration: none;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 12px;
+
+            letter-spacing: 2px;
+
+            transition: 0.3s;
+
+            border: 1px solid #866548;
+        }
+
+        .button:hover {
+
+            background: #e1c5a3;
+
+            color: #35251b;
+
+            transform: translateY(-3px);
+
+        }
+
+
+        /* =========================
+           CONTROLES
+        ========================= */
+
+        .controls {
+
+            position: absolute;
+
+            bottom: 45px;
+
+            left: 9%;
+
+            z-index: 5;
+
+            display: flex;
+
+            gap: 10px;
+        }
+
+        .dot {
+
+            width: 35px;
+
+            height: 3px;
+
+            background: rgba(255,255,255,0.4);
+
+            border: none;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .dot.active {
+
+            width: 60px;
+
+            background: #e2c29e;
+        }
+
+
+        /* =========================
+           INFORMACIÓN INFERIOR
+        ========================= */
+
+        .features {
+
+            background: #38271c;
+
+            color: #e8d8c3;
+
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            padding: 55px 8%;
+        }
+
+        .feature {
+
+            text-align: center;
+
+            padding: 10px 35px;
+
+            border-right: 1px solid #735a45;
+        }
+
+        .feature:last-child {
+
+            border-right: none;
+        }
+
+        .icon {
+
+            font-size: 30px;
+
+            margin-bottom: 20px;
+        }
+
+        .feature h3 {
+
+            font-family: Arial, sans-serif;
+
+            font-size: 12px;
+
+            letter-spacing: 3px;
+
+            font-weight: normal;
+
+            margin-bottom: 15px;
+        }
+
+        .feature p {
+
+            color: #cbb8a3;
+
+            font-size: 15px;
+
+            line-height: 1.5;
+        }
+
+        .portfolio,
+        .about,
+        .contact {
+            padding: 75px 8%;
+        }
+
+        .portfolio {
+            background: #e8d8c3;
+        }
+
+        .section-heading {
+            margin-bottom: 35px;
+            text-align: center;
+        }
+
+        .section-heading h2,
+        .about h2,
+        .contact h2 {
+            font-size: 38px;
+            font-weight: normal;
+            margin-bottom: 12px;
+        }
+
+        .section-heading p,
+        .about p,
+        .contact p {
+            font-family: Arial, sans-serif;
+            line-height: 1.7;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .project-card {
+            background: #38271c;
+            color: #eadbc7;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project-card:hover,
+        .project-card:focus {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 25px rgba(45, 33, 25, 0.25);
+        }
+
+        .project-card img {
+            display: block;
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+        }
+
+        .project-card h3,
+        .project-card p {
+            margin: 16px 18px 8px;
+        }
+
+        .project-card p {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font: 14px/1.6 Arial, sans-serif;
+            color: #cbb8a3;
+        }
+
+        .floor-plan {
+            height: 230px;
+            padding: 20px;
+            background: #f4eadb;
+        }
+
+        .plan-layout {
+            height: 100%;
+            display: grid;
+            grid-template-columns: 1.3fr 1fr 0.8fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 4px;
+            padding: 5px;
+            border: 3px solid #65472f;
+            background: #65472f;
+        }
+
+        .plan-room {
+            display: grid;
+            place-items: center;
+            padding: 4px;
+            background: #eadbc7;
+            color: #38271c;
+            font: 11px Arial, sans-serif;
+            text-align: center;
+        }
+
+        .plan-room.living {
+            grid-row: span 2;
+        }
+
+        .about {
+            background: #38271c;
+            color: #eadbc7;
+            text-align: center;
+        }
+
+        .about p {
+            max-width: 720px;
+            margin: 0 auto;
+            color: #cbb8a3;
+        }
+
+        .contact {
+            background: #d7c2a8;
+            text-align: center;
+        }
+
+        .contact-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 25px;
+            background: #65472f;
+            color: #fff3e3;
+            text-decoration: none;
+            font: 16px Arial, sans-serif;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .contact-link:hover,
+        .contact-link:focus {
+            background: #38271c;
+            transform: translateY(-3px);
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            header {
+
+                padding: 0 5%;
+            }
+
+            nav {
+
+                gap: 15px;
+            }
+
+            nav a {
+
+                font-size: 11px;
+            }
+
+            .hero-content {
+
+                padding: 80px 7%;
+            }
+
+            .features {
+
+                grid-template-columns: 1fr 1fr;
+
+                gap: 30px;
+            }
+
+            .feature {
+
+                border-right: none;
+
+                border-bottom: 1px solid #735a45;
+
+                padding-bottom: 30px;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            header {
+
+                height: auto;
+
+                padding: 25px;
+
+                flex-direction: column;
+
+                gap: 20px;
+            }
+
+            .logo {
+
+                font-size: 35px;
+            }
+
+            nav {
+
+                gap: 15px;
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+            .hero {
+
+                min-height: 700px;
+            }
+
+            .hero-content {
+
+                padding: 60px 25px;
+            }
+
+            .hero h1 {
+
+                font-size: 75px;
+            }
+
+            .subtitle {
+
+                font-size: 14px;
+
+                letter-spacing: 5px;
+            }
+
+            .slogan {
+
+                font-size: 14px;
+            }
+
+            .description {
+
+                font-size: 17px;
+            }
+
+            .controls {
+
+                left: 25px;
+
+                bottom: 30px;
+            }
+
+            .features {
+
+                grid-template-columns: 1fr;
+
+                padding: 40px 25px;
+            }
+
+
+            .portfolio,
+            .about,
+            .contact {
+                padding: 55px 25px;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header>
+
+
+        <div class="logo">
+
+            Procel
+
+            <span>
+                ARQUITECTURA
+            </span>
+
+        </div>
+
+
+        <nav>
+
+            <a href="#inicio">Inicio</a>
+
+            <a href="#proyectos">Proyectos</a>
+
+            <a href="#nosotros">Nosotros</a>
+
+            <a href="#contacto">Contacto</a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="hero" id="inicio">
+
+
+        <!-- CASAS DEL FONDO -->
+
+        <div class="background">
+
+            <div class="house active"></div>
+
+            <div class="house"></div>
+
+            <div class="house"></div>
+
+            <div class="house"></div>
+
+        </div>
+
+
+
+        <!-- CONTENIDO -->
+
+        <div class="hero-content">
+
+            <div class="small-title">
+
+                DISEÑAMOS ESPACIOS,
+                CONSTRUIMOS HISTORIAS
+
+            </div>
+
+
+            <h1>
+
+                Procel
+
+            </h1>
+
+
+            <div class="subtitle">
+
+                ARQUITECTURA
+
+            </div>
+
+
+            <div class="slogan">
+
+                “Diseñamos casas tan bonitas
+                que hasta tu suegra querrá mudarse.” 
+
+            </div>
+
+
+            <p class="description">
+
+                Creamos proyectos arquitectónicos
+                que combinan funcionalidad, estética
+                y armonía con el entorno.
+
+            </p>
+
+
+            <a href="#" class="button">
+
+                VER PROYECTOS →
+
+            </a>
+
+        </div>
+
+
+
+        <!-- CONTROLES -->
+
+        <div class="controls">
+
+            <button class="dot active" data-slide="0"></button>
+
+            <button class="dot" data-slide="1"></button>
+
+            <button class="dot" data-slide="2"></button>
+
+            <button class="dot" data-slide="3"></button>
+
+        </div>
+
+
+    </section>
+
+
+    <section class="portfolio" id="proyectos">
+        <div class="section-heading">
+            <h2>Proyectos</h2>
+            <p>Explora casas terminadas, obra negra y un plano conceptual interactivo.</p>
+        </div>
+
+        <div class="project-grid">
+            <article class="project-card" tabindex="0">
+                <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Casa moderna terminada con jardín">
+                <h3>Casa contemporánea</h3>
+                <p>Diseño cálido, espacios abiertos y conexión con el exterior.</p>
+            </article>
+
+            <article class="project-card" tabindex="0">
+                <img src="obranegra.jfif" alt="Estructura de una casa en construcción">
+                <h3>En obra negra</h3>
+                <p>El proyecto toma forma desde su estructura y cada detalle cuenta.</p>
+            </article>
+
+            <article class="project-card" tabindex="0">
+                <div class="floor-plan" role="img" aria-label="Plano conceptual inventado de casa con sala, cocina, recámara y estudio">
+                    <div class="plan-layout">
+                        <div class="plan-room living">Sala y comedor</div>
+                        <div class="plan-room">Cocina</div>
+                        <div class="plan-room">Estudio</div>
+                        <div class="plan-room">Recámara</div>
+                    </div>
+                </div>
+                <h3>Plano conceptual</h3>
+                <p>Una distribución inventada para imaginar una casa funcional y luminosa.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="about" id="nosotros">
+        <h2>Nosotros</h2>
+        <p>En Procel diseñamos y hacemos casas pensadas para quienes las viven. Tenemos años de trayectoria transformando ideas en espacios funcionales, con atención cercana durante cada etapa del proyecto.</p>
+    </section>
+
+    <section class="contact" id="contacto">
+        <h2>Contacto</h2>
+        <p>¿Tienes una idea para tu casa? Conversemos sobre tu proyecto.</p>
+        <a class="contact-link" href="tel:+524291072109">Llámanos: 429 107 2109</a>
+    </section>
+
+
+
+    <!-- =========================
+         CARACTERÍSTICAS
+    ========================= -->
+
+    <section class="features">
+
+
+        <div class="feature">
+
+            <div class="icon">
+                ⌂
+            </div>
+
+            <h3>
+                DISEÑO FUNCIONAL
+            </h3>
+
+            <p>
+                Espacios que se adaptan
+                a tu estilo de vida.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="icon">
+                ◇
+            </div>
+
+            <h3>
+                SUSTENTABILIDAD
+            </h3>
+
+            <p>
+                Proyectos responsables
+                con el medio ambiente.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="icon">
+                ▧
+            </div>
+
+            <h3>
+                EXPERIENCIA
+            </h3>
+
+            <p>
+                Años de trayectoria
+                en arquitectura.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="icon">
+                ♧
+            </div>
+
+            <h3>
+                ATENCIÓN PERSONALIZADA
+            </h3>
+
+            <p>
+                Cada proyecto es único,
+                como tú.
+            </p>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        const houses = document.querySelectorAll(".house");
+
+        const dots = document.querySelectorAll(".dot");
+
+        let currentSlide = 0;
+
+        let timer;
+
+
+        function showSlide(index) {
+
+            houses.forEach((house, i) => {
+
+                house.classList.toggle(
+                    "active",
+                    i === index
+                );
+
+            });
+
+
+            dots.forEach((dot, i) => {
+
+                dot.classList.toggle(
+                    "active",
+                    i === index
+                );
+
+            });
+
+
+            currentSlide = index;
+
+        }
+
+
+        function nextSlide() {
+
+            let next = currentSlide + 1;
+
+            if (next >= houses.length) {
+
+                next = 0;
+
+            }
+
+            showSlide(next);
+
+        }
+
+
+        function startSlider() {
+
+            timer = setInterval(
+                nextSlide,
+                5000
+            );
+
+        }
+
+
+        dots.forEach((dot) => {
+
+            dot.addEventListener(
+                "click",
+                () => {
+
+                    clearInterval(timer);
+
+                    showSlide(
+                        Number(dot.dataset.slide)
+                    );
+
+                    startSlider();
+
+                }
+            );
+
+        });
+
+
+        startSlider();
+
+    </script>
+
+
+</body>
